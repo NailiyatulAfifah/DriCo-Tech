@@ -62,7 +62,7 @@ class M_mobil extends CI_Model {
                 'harga' => $this->input->post('harga')
         );
         return $this->db->where('kode_mobil', $this->input->post('kode_mobil_lama'))
-                        ->update('mobil', $data);
+                        ->update('Mobil', $data);
     }
 
     public function hapus_mobil($kode_mobil='')

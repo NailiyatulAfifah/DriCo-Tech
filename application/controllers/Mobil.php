@@ -38,12 +38,59 @@ class Mobil extends CI_Controller
 		$this->form_validation->set_rules('tahun', 'tahun', 'trim|required');
 		$this->form_validation->set_rules('stok', 'stok', 'trim|required');
 		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
+		if ($this->mobil->simpan_mobil('')) 
+		{
+			$this->session->set_flashdata('pesan', 'Sukses menambah');
+		}
+		else
+		{
+			$this->session->set_flashdata('pesan', 'Gagal menambah');
+		}
+		redirect('mobil','refresh');
 	}
 
 	public function edit_mobil($id)
 	{
 		$data=$this->mobil->detail($id);
 		echo json_encode($data);
+	}
+
+	public function mobil_update()
+	{
+		if($this->input->post('edit')){
+			if($_FILES['foto_cover']['name']==""){
+				if($this->mobil->edit_mobil()){
+					$this->session->set_flashdata('pesan', 'Sukses update');
+					redirect('mobil');
+				} else {
+					$this->session->set_flashdata('pesan', 'Gagal update');
+					redirect('mobil');
+				}
+			} else {
+				$config['upload_path'] = './assets/img/';
+				$config['allowed_types'] = 'gif|jpg|png|jpeg';
+				$config['max_size']  = '20000';
+				$config['max_width']  = '5024';
+				$config['max_height']  = '5768';
+				
+				$this->load->library('upload', $config);
+				
+				if ( ! $this->upload->do_upload('foto_cover')){
+					$this->session->set_flashdata('pesan', 'Gagal Upload');
+					redirect('mobil');
+				}
+				else{
+					if($this->mobil->edit_mobil_dengan_foto($this->upload->data('file_name'))){
+						$this->session->set_flashdata('pesan', 'Sukses update');
+						redirect('mobil');
+					} else {
+						$this->session->set_flashdata('pesan', 'Gagal update');
+						redirect('mobil');
+					}
+				}
+			}
+			
+		}
 	}
 
 	public function hapus($kode_mobil='')

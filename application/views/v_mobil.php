@@ -40,7 +40,7 @@
         <h4 class="modal-titile">Tambah mobil</h4>
       </div>
       <div class="modal-body">
-        <form action="<?=base_url('index.php/Mobil/tambah')?>" method="post" enctype="multipart/form-data">
+        <form action="<?=base_url('index.php/mobil/tambah')?>" method="post" enctype="multipart/form-data">
           <table>
             <tr>
               <td>Kode</td>
@@ -89,7 +89,7 @@
         <h4 class="modal-titile">Edit mobil</h4>
       </div>
       <div class="modal-body">
-        <form action="<?=base_url('index.php/mobil/mobil_update')?>" method="post" enctype="multipart/form-data">
+        <form action="<?=base_url('index.php/mobil/edit_mobil')?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="kode_mobil_lama" id="kode_mobil_lama">
           <table>
             <tr>
@@ -135,11 +135,11 @@
   function edit(a){
     $.ajax({
       type:"post",
-      url:"<?=base_url()?>index.php/mobil/edit_mobil/"+a,
+      url:"<?=base_url()?>index.php/Mobil/edit_mobil/"+a,
       dataType:"json",
       success:function(data){
         $("#kode_mobil").val(data.kode_mobil);
-        $("#tipe_mobil").val(data.judul_mobil);
+        $("#tipe_mobil").val(data.tipe_mobil);
         $("#id_kategori").val(data.id_kategori);
         $("#tahun").val(data.tahun);
         $("#stok").val(data.stok);

@@ -207,13 +207,7 @@
               
               	  <p class="centered"><a href="profile.html"><img src="<?=base_url()?>assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	  <h5 class="centered"><?=$this->session->userdata('nama_user')?></h5>
-              	  	
-                  <li class="sub-menu">
-                      <a href="<?=base_url('index.php/mobil/toko')?>" >
-                          <i class="fa fa-desktop"></i>
-                          <span>Shop</span>
-                      </a>
-                  </li>
+
                   <?php if($this->session->userdata('divisi_bagian')=="Admin"):?>
                   <li class="sub-menu">
                       <a href="<?=base_url('index.php/mobil')?>" >
